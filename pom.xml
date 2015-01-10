@@ -17,6 +17,19 @@
 		<connection>scm:svn://localhost:3690/root/SVNDemo/branches/01.00.00.DEV</connection>
 		<developerConnection>scm:svn://localhost:3690/root/SVNDemo/branches/01.00.00.DEV</developerConnection>
 	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Releases</name>
+			<url>http://localhost:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexu</id>
+			<name>CI_Snapshots</name>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
