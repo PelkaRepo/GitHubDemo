@@ -46,12 +46,12 @@ public class TestStart {
 	 * Tests the functionality of the hellowWorld method form the
 	 * Start class to output a message to the system console
 	 * 
-	 * Test method for {@link org.pelka.demo.gitdemo.main.Start#helloWorld()}.
+	 * Test method for {@link org.pelka.demo.gitdemo.rest.main.Start#helloWorld()}.
 	 */
 	@Test
 	public void testHelloWorld() {
 		
-		assertEquals("|-------------HELLO WORLD!--------------|",org.pelka.demo.gitdemo.main.Start.helloWorld("HELLO WORLD"));
+		assertEquals("|-------------HELLO WORLD!--------------|",org.pelka.demo.gitdemo.rest.main.Start.helloWorld("HELLO WORLD"));
 	}
 
 }

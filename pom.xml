@@ -1,23 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.pelka.demo</groupId>
-	<artifactId>svndemo</artifactId>
+	<groupId>org.pelka.demo.gitdemo.rest</groupId>
+	<artifactId>gitdemo</artifactId>
 	<version>01.00.00.01-SNAPSHOT</version>
+	<packaging>war</packaging>
 
-	<name>SVNDemo</name>
-	<url>http://localhost:9090</url>
-	<description>This is meant to be a demo project for the local use of a subversion repository hook</description>
+	<name>GitDemo</name>
+	<url>http://pelka.ddns.net:9090</url>
+	<description>This is meant to be a demo project for the local use of a GitHub for Spring MVC project</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<start-class>org.pelka.demo.gitdemo.rest.main.SpringDemo</start-class>
 	</properties>
 
 	<scm>
-		<connection>scm:svn://localhost:3690/root/SVNDemo/branches/01.00.00.DEV</connection>
-		<developerConnection>scm:svn://localhost:3690/root/SVNDemo/branches/01.00.00.DEV</developerConnection>
+		<connection>scm:git:ssh://github.com/PelkaRepo/GitHubDemo</connection>
+		<developerConnection>scm:git:ssh://github.com/PelkaRepo/GitHubDemo</developerConnection>
 	</scm>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>nexus</id>
@@ -60,7 +63,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
 				<dependencies>
 					<dependency>
 						<groupId>org.apache.maven.surefire</groupId>
@@ -74,7 +76,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.1</version>
 				<configuration>
 					<show>private</show>
 					<nohelp>true</nohelp>
@@ -89,10 +90,21 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>org.pelka.demo.svndemo.main.Start</mainClass>
+							<mainClass>org.pelka.demo.gitdemo.rest.main.SpringDemo</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<!-- Artifact Assembly -->
@@ -102,14 +114,14 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>org.pelka.demo.svndemo.main.Start</mainClass>
+							<mainClass>org.pelka.demo.gitdemo.main.SpringDemo</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 				</configuration>
-				
+
 				<executions>
 					<execution>
 						<id>make-assembly</id> <!-- this is used for inheritance merges -->
@@ -127,29 +139,33 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<tagBase>svn://localhost:3690/root/SVNDemo/tags</tagBase>
+					<tagBase>ssh://git@github.com/PelkaRepo/GitHubDemo/tags</tagBase>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.1.RELEASE</version>
+	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
-			<version>1.1</version>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
 		</dependency>
 
 		<dependency>
+			<!-- Core Java Dependencies -->
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.sun.jdmk</groupId>
@@ -164,6 +180,30 @@
 					<artifactId>jms</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<!-- Spring Boot -->
+		<!-- Get the dependencies of a web application -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+		<!-- Spring Data MongoDB -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
 		</dependency>
 
 	</dependencies>

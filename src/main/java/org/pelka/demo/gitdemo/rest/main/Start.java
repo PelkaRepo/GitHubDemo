@@ -2,7 +2,7 @@
  * This package holds the main method and is where the main thread
  * will begin iteration
  */
-package org.pelka.demo.gitdemo.main;
+package org.pelka.demo.gitdemo.rest.main;
 
 import org.apache.log4j.*;
 

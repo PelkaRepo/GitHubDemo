@@ -9,4 +9,4 @@
  * @author Arnold Pelka
  *
  */
-package org.pelka.demo.gitdemo.main;
+package org.pelka.demo.gitdemo.rest.main;
