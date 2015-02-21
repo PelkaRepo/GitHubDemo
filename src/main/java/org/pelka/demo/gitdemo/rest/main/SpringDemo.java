@@ -4,9 +4,9 @@
 package org.pelka.demo.gitdemo.rest.main;
 
 import org.apache.log4j.Logger;
-import org.pelka.demo.gitdemo.rest.config.AppConfig;
-import org.pelka.demo.gitdemo.rest.service.MyService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * The orchestration for all spring-based commands will occur here
@@ -14,6 +14,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  * @author arnoldpelka
  *
  */
+@ComponentScan
+@EnableAutoConfiguration
 public class SpringDemo {
 	final static Logger logger = Logger.getLogger(SpringDemo.class);
 
@@ -24,14 +26,7 @@ public class SpringDemo {
 	 * does not require any)
 	 */
 	public static void main(String[] args) {
-		@SuppressWarnings("resource")
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-		ctx.register(AppConfig.class);
-		ctx.scan("org.pelka.demo.gitdemo.rest.config");
-	    ctx.refresh();
-	    
-	    MyService myService = ctx.getBean(MyService.class);
-	    myService.doStuff();
+		SpringApplication.run(SpringDemo.class, args);
 	}
 
 }
