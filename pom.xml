@@ -14,6 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<start-class>org.pelka.demo.gitdemo.rest.main.SpringDemo</start-class>
+		<final.name>GitRestDemo</final.name>
 	</properties>
 
 	<scm>
